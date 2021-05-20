@@ -9,13 +9,17 @@ class BaiduSpiderSpider(scrapy.Spider):
     name = 'baidu_spider'
     allowed_domains = ['baidu.com']
     start_urls = ['https://www.baidu.com/s?ie=UTF-8&wd=baidu']
-    mode = ''
+    parentid = ''
+    root = ''
 
-    def __init__(self, keyword=None, mode=None, *args, **kwargs):
+    def __init__(self, keyword=None, parentid=None, root=None, *args, **kwargs):
         super(BaiduSpiderSpider, self).__init__(*args, **kwargs)
         # 因为start_urls是列表，所以用这种方法把传入的字符串变成列表
         url = 'https://www.baidu.com/s?ie=UTF-8&wd=' + keyword
-        self.mode = mode
+        self.parentid = parentid
+        self.root = root
+
+
         self.start_urls = url.split(' ')
         print('start_urls为：', self.start_urls)
 
@@ -38,10 +42,10 @@ class BaiduSpiderSpider(scrapy.Spider):
             item['url'] = urls[i].replace('"', '').replace('}', '')
             item['title'] = title.replace(':', '').replace('"', '', 2).replace(',', ''),
             # 暂时为root
-            item['parentid'] = self.mode
+            item['parentid'] = self.parentid
             item['mid'] = uuid.uuid1()
             # 暂定
-            item['root'] = 'root'
+            item['root'] = self.root
             # 暂定
             item['nodetype'] = 'a'
 
