@@ -24,16 +24,19 @@ class BaiduSpiderSpider(scrapy.Spider):
         print('start_urls为：', self.start_urls)
 
     def parse(self, response):
-        item = CrawlerItem()
+
         titles = response.xpath("/html/body//div[2]/div/@data-tools").re("""[:]["].*["][,]""")
         urls = response.xpath("/html/body//div[2]/div/@data-tools").re('''["][h][t][t].*["][}]''')
-        # print("\n\n\n\n-------------------分隔符-------------------\n\n\n\n")
-        # print(titles)
-        # print("\n\n\n\n-------------------分隔符-------------------\n\n\n\n")
-        # print(urls)
-        # print("\n\n\n\n-------------------分隔符-------------------\n\n\n\n")
+        print("\n\n\n\n-------------------分隔符-------------------\n\n\n\n")
+        print(titles)
+        print("titles的长度是： ", len(titles))
+        print("\n\n\n\n-------------------分隔符-------------------\n\n\n\n")
+        print(urls)
+        print("urls的长度： ", len(urls))
+        print("\n\n\n\n-------------------分隔符-------------------\n\n\n\n")
         i = 0
         for title in titles:
+            item = CrawlerItem()
             print({
                 # replace ：去除正则时匹配到的多余的字符
                 "titles": title.replace(':', '').replace('"', '', 2).replace(',', ''),
@@ -44,9 +47,8 @@ class BaiduSpiderSpider(scrapy.Spider):
             # 暂时为root
             item['parentid'] = self.parentid
             item['mid'] = uuid.uuid1()
-            # 暂定
             item['root'] = self.root
-            # 暂定
+            # 因为目前爬出来的都是URL，所以统一爬出来的结果为a
             item['nodetype'] = 'a'
 
 
