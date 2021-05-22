@@ -15,4 +15,11 @@ class CrawlerItem(scrapy.Item):
     mid = scrapy.Field()
     root = scrapy.Field()
     nodetype = scrapy.Field()
+    source = scrapy.Field()
+    a = scrapy.Field()
+    b = scrapy.Field()
+    c = scrapy.Field()
+    d = scrapy.Field()
+    e = scrapy.Field()
+
     pass

@@ -50,9 +50,9 @@ class CrawlerPipeline(object):
     def do_insert(self, cursor, item):
         # 对数据库进行插入操作，并不需要commit，twisted会自动commit
         insert_sql = """
-        insert into mindmap_baidu(title, url, parentid, mid, root, nodetype) VALUES (%s,%s,%s,%s,%s,%s)
+        insert into mindmap_baidu(title, url, parentid, mid, root, nodetype, source, a, b, c, d, e) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """
-        cursor.execute(insert_sql, (item['title'], item['url'], item['parentid'], item['mid'], item['root'], item['nodetype']))
+        cursor.execute(insert_sql, (item['title'], item['url'], item['parentid'], item['mid'], item['root'], item['nodetype'], item['source'], item['a'], item['b'], item['c'], item['d'], item['e'] ))
         print("\n\n\n\n-------------------分隔符 执行do_insert第{0}次-------------------\n\n\n\n".format(self.i))
         self.i = self.i + 1
     def handle_error(self, failure):

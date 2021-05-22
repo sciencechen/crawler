@@ -51,6 +51,15 @@ class BaiduSpiderSpider(scrapy.Spider):
             # 因为目前爬出来的都是URL，所以统一爬出来的结果为a
             item['nodetype'] = 'a'
 
+            item['source'] = 'baidu'
+            item['a'] = 'xx'
+            item['b'] = 'xx'
+            item['c'] = 'xx'
+            item['d'] = 'xx'
+            item['e'] = 'xx'
+
+
+
 
 
             yield item
